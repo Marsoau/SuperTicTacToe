@@ -3,7 +3,7 @@
     public enum TTTResult
     {
         None,
-        Noone,
+        NoOne,
         X = 'X',
         O = 'O',
     }

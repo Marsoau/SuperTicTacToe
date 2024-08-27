@@ -4,9 +4,9 @@ namespace SuperTicTacToe.API.Interfaces
 {
     public interface IHasResult
     {
-        TTTResult Result {
-            get => GetResult();
+        public TTTResult Result {
+            get => UpdateResult();
         }
-        TTTResult GetResult();
+        public TTTResult UpdateResult();
     }
 }
