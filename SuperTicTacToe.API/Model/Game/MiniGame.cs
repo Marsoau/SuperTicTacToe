@@ -13,13 +13,26 @@ namespace SuperTicTacToe.API.Model.Game
         }
 
         public event Action<int, int, TTTChar>? OnCellChanged;
+        public event Action<bool> OnStateChanged;
 
         [JsonPropertyName("isEnabled")]
-        public bool IsEnabled { get; set; }
+        public bool IsEnabled {
+            get => _isEnabled && FinalResult == TTTResult.None;
+            set {
+                _isEnabled = value;
+
+                OnStateChanged?.Invoke(IsEnabled);
+            }
+        }
+        private bool _isEnabled;
 
         public MiniGame() {
             Table = new TTTChar?[9];
             IsEnabled = true;
+
+            OnFinalResultChanged += () => {
+                OnStateChanged?.Invoke(IsEnabled);
+            };
         }
 
         public void Clear() {

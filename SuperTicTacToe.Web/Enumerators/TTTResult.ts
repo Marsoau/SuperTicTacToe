@@ -1,6 +1,6 @@
 export enum TTTResult {
     None,
     NoOne,
-    X = 'X',
-    O = 'O'
+    X = 88,
+    O = 79
 }

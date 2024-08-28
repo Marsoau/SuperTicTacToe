@@ -39,7 +39,7 @@ namespace SuperTicTacToe.API.Model
         private int _score;
 
         [JsonIgnore]
-        public TTTChar? Char { get; private set; }
+        public TTTChar? Char { get; set; }
         [JsonIgnore]
         public GameCommandsModule Commands
             => new GameCommandsModule(this);

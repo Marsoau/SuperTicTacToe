@@ -5,3 +5,8 @@
         [{{$index}}] - {{room.name}}
     </a>
 }
+<div class="room-creation-container">
+    <input placeholder="name" [(ngModel)]="nameInputValue"/>
+    <input placeholder="password" [(ngModel)]="passwordInputValue"/>
+    <button (click)="CreateClick()">Create</button>
+</div>

@@ -1,0 +1,21 @@
+@if (miniGame) {
+    <div class="mini-game-wrapper" [style]="{
+            backgroundColor: miniGame.isEnabled ? '#F0F0F0' : '#E0E0E0',
+            pointerEvents: miniGame.isEnabled ? 'all' : 'none'
+        }">
+            @if (miniGame.finalResult != 0) {
+                <div class="mini-game-finalresult">{{miniGame.finalResult == 79 ? 'O' : miniGame.finalResult == 88 ? 'X' : 'Draw'}}</div>
+            }
+            @else {
+                <div class="mini-game-grid">
+                    @for (cell of miniGame.table; track $index) {
+                        <div class="mini-game-cell" (click)="CellClick($index)" [ngClass]="{
+                            'mini-game-cell-empty': !cell
+                        }" [style]="{
+                            backgroundColor: miniGame.isEnabled ? null : '#EEE',
+                        }">{{cell == 79 ? 'O' : cell == 88 ? 'X' : ''}}</div>
+                    }
+                </div>
+            }
+    </div>
+}

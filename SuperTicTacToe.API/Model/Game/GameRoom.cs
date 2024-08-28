@@ -31,11 +31,14 @@ namespace SuperTicTacToe.API.Model.Game
 
                 if (_playerX is not null) {
                     SpectatorPlayers.Add(_playerX);
+                    _playerX.Char = null;
+
                     Events.SendEvent(EventHeader.SpectatorPlayersChanged, SpectatorPlayers);
                 }
                 if (value is not null) {
                     SpectatorPlayers.Remove(value);
                     _playerX = value;
+                    _playerX.Char = TTTChar.X;
                 }
                 else _playerX = value;
                 
@@ -51,10 +54,14 @@ namespace SuperTicTacToe.API.Model.Game
 
                 if (_playerO is not null) {
                     SpectatorPlayers.Add(_playerO);
+                    _playerO.Char = null;
+
+                    Events.SendEvent(EventHeader.SpectatorPlayersChanged, SpectatorPlayers);
                 }
                 if (value is not null) {
                     SpectatorPlayers.Remove(value);
                     _playerO = value;
+                    _playerO.Char = TTTChar.O;
                 }
                 else _playerO = value;
 
@@ -101,7 +108,10 @@ namespace SuperTicTacToe.API.Model.Game
             for (int i = 0; i < 9; i++) {
                 var exIndex = i;
                 Game.MiniGames[exIndex].OnFinalResultChanged += () => {
-                    Events.SendEvent(EventHeader.MiniGameResultChanged, Game.MiniGames[exIndex].FinalResult);
+                    Events.SendEvent(EventHeader.MiniGameResultChanged, new {
+                        gameI = exIndex,
+                        newResult = Game.MiniGames[exIndex].FinalResult
+                    });
                 };
                 Game.MiniGames[exIndex].OnCellChanged += (x, y, c) => {
                     Events.SendEvent(EventHeader.MiniGameCellWasSet, new {
@@ -109,6 +119,12 @@ namespace SuperTicTacToe.API.Model.Game
                         x,
                         y,
                         c
+                    });
+                };
+                Game.MiniGames[exIndex].OnStateChanged += (newState) => {
+                    Events.SendEvent(EventHeader.MiniGameStateChanged, new {
+                        gameI = exIndex,
+                        newState
                     });
                 };
             }

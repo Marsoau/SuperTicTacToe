@@ -33,10 +33,11 @@ namespace SuperTicTacToe.API.Model.Game
             var game = MiniGames[gameX + gameY * 3];
             bool placementResult = game.PlaceAt(posX, posY, c);
             if (!placementResult) return false;
+            var targetGame = MiniGames[posX + posY * 3];
             
             for (int y = 0; y < 3; y++) {
                 for (int x = 0; x < 3; x++) {
-                    MiniGames[x + y * 3].IsEnabled = game.FinalResult != TTTResult.None || (x == posX && y == posY);
+                    MiniGames[x + y * 3].IsEnabled = targetGame.FinalResult != TTTResult.None || (x == posX && y == posY);
                 }
             }
 

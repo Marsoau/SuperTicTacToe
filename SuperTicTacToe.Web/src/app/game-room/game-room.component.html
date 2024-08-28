@@ -1,1 +1,14 @@
-<p>game-room works! rid: {{requestedId}}</p>
+<div class="game-room-wrapper">
+    @if (displayPasswordInput) {
+        <input placeholder="password" [(ngModel)]="passwordInputValue" />
+        <button (click)="TryJoin()">join</button>
+    }
+    @else if (api.currentRoom) {
+        <div class="game-header">{{api.currentRoom.name}}</div>
+        <app-super-game [superGame]="api.currentRoom.superGame"></app-super-game>
+        <app-xoplayers/>
+    }
+    @else {
+        <div>else</div>
+    }
+</div>

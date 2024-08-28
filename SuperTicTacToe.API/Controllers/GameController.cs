@@ -45,7 +45,7 @@ namespace SuperTicTacToe.API.Controllers
 			var password = ControllerBaseExtensions.GetQueryValue<string>(this, "password");
 			var qPlayerToken = Request.Query["player-token"].FirstOrDefault();
 			Guid? playerToken = null;
-			if (qPlayerToken is not null) {
+			if (qPlayerToken is not null && qPlayerToken.Length > 0) {
 				if (Guid.TryParse(qPlayerToken, out var token)) {
 					playerToken = token;
 				}
@@ -60,7 +60,8 @@ namespace SuperTicTacToe.API.Controllers
 				player = room.GetPlayer(playerToken.Value);
 			}
 			if (player is null) {
-                if (room.Password != password) return Unauthorized("Password incorrect");
+                if (room.Password?.Length > 0 && room.Password != password)
+					return Unauthorized("Password incorrect");
                 player = room.AddPlayer();
 			}
 
@@ -160,7 +161,7 @@ namespace SuperTicTacToe.API.Controllers
 			var password = ControllerBaseExtensions.GetQueryValue<string>(this, "password");
 
 			var room = _rooms.GetRequired(gameId);
-			if (room.Password is not null && room.Password != password) {
+			if (room.Password?.Length > 0 && room.Password != password) {
 				throw new Exception("Wrong room password");
 			}
 

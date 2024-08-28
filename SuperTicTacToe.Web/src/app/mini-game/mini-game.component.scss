@@ -1,0 +1,72 @@
+:host {
+    display: grid;
+
+}
+
+.mini-game-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    
+    background-color: #F0F0F0;
+
+    margin: 3px;
+    
+    border-radius: 8px;
+
+    &:hover {
+        margin: 0px;
+        border-radius: 12px;
+    }
+    &:hover .mini-game-grid {
+        margin: 9px;
+    }
+    transition: all 200ms;
+}
+
+.mini-game-finalresult {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    text-align: center;
+
+    color: #484848;
+    
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.mini-game-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 6px;
+
+    margin: 6px;
+
+    transition: all 200ms;
+}
+
+.mini-game-cell {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    text-align: center;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 700;
+    
+    color: #484848;
+    background-color: #FFFFFF;
+
+    transition: all 100ms;
+
+    &-empty:hover {
+        background-color: #F8F8F8;
+        cursor: pointer;
+    }
+}

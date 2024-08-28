@@ -1,0 +1,26 @@
+:host {
+    display: flex;
+    justify-content: center;
+}
+
+.game-room-wrapper {
+}
+
+.game-header {
+    color: #484848;
+    background-color: #F0F0F0;
+
+    font-size: 21px;
+    font-weight: 500;
+
+    border-radius: 8px;
+    margin: 2px;
+
+    padding: 4px 0px;
+
+    text-align: center;
+}
+
+app-xoplayers {
+    margin: 2px;
+}

@@ -1,4 +1,4 @@
 export enum TTTChar {
-    X = 'X',
-    O = 'O'
+    X = 88,
+    O = 79
 }

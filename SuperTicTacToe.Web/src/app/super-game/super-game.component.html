@@ -1,0 +1,7 @@
+@if (superGame) {
+    <div class="super-game-grid">
+        @for (miniGame of superGame.miniGames; track $index) {
+            <app-mini-game [gameIndex]="$index" [miniGame]="miniGame"></app-mini-game>
+        }
+    </div>
+}

@@ -9,6 +9,7 @@
         SpectatorPlayersChanged,
         SuperGameResultChanged,
         MiniGameResultChanged,
+        MiniGameStateChanged,
         MiniGameCellWasSet,
         TurnCharChanged,
         XScoreChanged,
