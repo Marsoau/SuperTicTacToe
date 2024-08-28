@@ -1,0 +1,7 @@
+@for (room of api.availableRooms; track $index) {
+    <a routerLink="/game" [queryParams]="{
+        id: $index
+    }" routerLinkActive="active">
+        [{{$index}}] - {{room.name}}
+    </a>
+}

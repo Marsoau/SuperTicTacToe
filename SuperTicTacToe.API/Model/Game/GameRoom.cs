@@ -16,7 +16,7 @@ namespace SuperTicTacToe.API.Model.Game
         [JsonIgnore]
         public string? Password { get; }
 
-        [JsonPropertyName("spectatorPlayers")]
+        [JsonPropertyName("spectators")]
         public List<Player> SpectatorPlayers { get; }
         [JsonIgnore]
         private Player? _playerX;

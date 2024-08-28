@@ -7,6 +7,7 @@ using SuperTicTacToe.API.Attributes;
 using SuperTicTacToe.API.Modules;
 using System.Reflection;
 using System.Text.Json;
+using SuperTicTacToe.API.Model;
 
 namespace SuperTicTacToe.API.Controllers
 {
@@ -34,20 +35,34 @@ namespace SuperTicTacToe.API.Controllers
 			var player = room.AddPlayer();
 
 			return Ok(new {
-				playerId = player.Id,
                 playerToken = player.Token,
-				room = player.Room,
+				roomId = player.Room.Id,
             });
 		}
 		[HttpGet("Join")]
 		public IActionResult Join() {
 			var gameId = ControllerBaseExtensions.GetRequiredQueryValue<int>(this, "id");
 			var password = ControllerBaseExtensions.GetQueryValue<string>(this, "password");
+			var qPlayerToken = Request.Query["player-token"].FirstOrDefault();
+			Guid? playerToken = null;
+			if (qPlayerToken is not null) {
+				if (Guid.TryParse(qPlayerToken, out var token)) {
+					playerToken = token;
+				}
+				else return BadRequest("Invalid player token format");
+			}
 
 			var room = _rooms.GetRequired(gameId);
-			if (room.Password != password) return Unauthorized("Password incorrect");
 
-			var player = room.AddPlayer();
+			Player? player = null;
+
+			if (playerToken is not null) {
+				player = room.GetPlayer(playerToken.Value);
+			}
+			if (player is null) {
+                if (room.Password != password) return Unauthorized("Password incorrect");
+                player = room.AddPlayer();
+			}
 
 			return Ok(new {
 				playerId = player.Id,

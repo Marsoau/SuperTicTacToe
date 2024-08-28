@@ -16,6 +16,15 @@ namespace SuperTicTacToe.API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddCors(options => {
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder => {
+                        builder.AllowAnyOrigin()
+                               .AllowAnyHeader()
+                               .AllowAnyMethod();
+                    });
+            });
+
             builder.Services.AddSingleton<GameRoomsRepository>();
 
             var app = builder.Build();
@@ -25,7 +34,7 @@ namespace SuperTicTacToe.API
                 //app.UseSwagger();
                 //app.UseSwaggerUI();
             }
-
+            app.UseCors("AllowSpecificOrigin");
             app.MapControllers();
 
             app.Run();

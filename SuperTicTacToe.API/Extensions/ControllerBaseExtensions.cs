@@ -6,7 +6,7 @@ namespace SuperTicTacToe.API.Extensions
 {
     public static class ControllerBaseExtensions
     {
-		public static T GetRequiredQueryValue<T>(this ControllerBase controller, string key){
+		public static T GetRequiredQueryValue<T>(this ControllerBase controller, string key) {
 			var value = controller.Request.Query[key].FirstOrDefault()
 				?? throw new Exception($"No required \"{key}\" found in query");
 
